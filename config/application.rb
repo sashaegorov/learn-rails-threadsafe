@@ -8,7 +8,8 @@ Bundler.require(*Rails.groups)
 
 module LearnRailsThreadsafe
   class Application < Rails::Application
-    config.allow_concurrency = false
+    # This is where Rack::Lock removed
+    # config.allow_concurrency = false
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
