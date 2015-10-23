@@ -7,7 +7,7 @@ class RaceConditionController < ApplicationController
   end
 
   trap(:INFO) do
-    $stderr.puts "Count: #{RaceConditionController.counter}"
+    $stderr.puts "Count: #{RaceConditionController.counter}\n"
   end
 
   def index
