@@ -49,6 +49,31 @@ Count: 66
 ```
 There is no race condition: `63 + 63 + 58 + 66 = 250`
 
+## Unicorn
+Started as `env RAILS_ENV=production unicorn -p 9091 -c config/unicorn.rb`.
+
+#### **Unicorn** `4 x workers` without Rack::Lock
+```
+21.27 real   0.38 user   0.20 sys
+Count: 58
+Count: 69
+Count: 65
+Count: 58
+```
+There is no race condition: `58 + 69 + 65 + 58 = 250`
+
+#### **Unicorn** `4 x workers` with Rack::Lock
+```
+21.29 real         0.38 user         0.19 sys
+Count: 65
+Count: 63
+Count: 60
+Count: 62
+```
+There is no race condition: `65 + 63 + 60 + 62 = 250`
+
+There is no time difference which expected from `Rack::Lock`.
+
 ## Notes
 
 This how `Rack::Lock` may be controlled in `application.rb`:
@@ -61,5 +86,5 @@ env RAILS_ENV=production bundle exec rake middleware
 ```
 
 ## TODO:
-- `Thin` server
-- `Unicron` server
+- Try to rum `puma` on non-MRI Rubies
+- ~~`Thin` server~~
